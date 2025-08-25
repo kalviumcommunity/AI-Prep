@@ -2,7 +2,6 @@ from google import genai
 import os
 from google.genai import types
 from dotenv import load_dotenv
-
 load_dotenv()
 
 client = genai.Client(api_key=os.getenv("gemini_api_key"))
@@ -27,5 +26,4 @@ response = client.models.generate_content(
         temperature=0.3
     )
 )
-
 print(response.text)
