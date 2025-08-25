@@ -7,16 +7,17 @@ load_dotenv()
 
 client = genai.Client(api_key=os.getenv("gemini_api_key"))
 
-# User's input (could come from your app, chatbot, or database)
-place = "Thailand"  
-question = f"Which is the most beautiful beach in {place}?"
-
-# Dynamic prompt
-prompt = f"""
+prompt = """
 Question: Which is the most beautiful beach in India?
 Answer: Radhanagar Beach in the Andaman Islands
 
-Question: {question}
+Question: Which is the most beautiful beach in Thailand?
+Answer: Maya Bay on Ko Phi Phi Leh
+
+Question: Which is the most beautiful beach in Australia?
+Answer: Whitehaven Beach in the Whitsundays
+
+Question: Which is the most beautiful beach in Greece?
 """
 
 response = client.models.generate_content(
