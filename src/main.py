@@ -5,16 +5,22 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
 client = genai.Client(api_key=os.getenv("gemini_api_key"))
 
-response = client.models.generate_content_stream(
+# One-shot example: show 1 QA pair, then ask a new one
+prompt = """
+Question: Which is the most beautiful beach in India?
+Answer: Radhanagar Beach in the Andaman Islands
+
+Question: Which is the most beautiful beach in the world?
+"""
+
+response = client.models.generate_content(
     model="gemini-2.5-flash",
-    contents=["Is there beach in trichy?"],
+    contents=[prompt],
     config=types.GenerateContentConfig(
-        temperature=0.2
+        temperature=0.3
     )
 )
 
-for chunk in response:
-    print(chunk.text, end="")
+print(response.text)
